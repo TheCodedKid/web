@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0058)https://fiddle.jshell.net/thecodedkid/pLj12osm/show/light/ -->
+<!-- saved from url=(0061)https://fiddle.jshell.net/thecodedkid/pLj12osm/10/show/light/ -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <title>Main Website</title>
@@ -75,8 +75,8 @@ body {
 
 <!-- The two texts -->
 <div id="container">
-	<span id="text1" style="opacity: 0.86803; filter: blur(3.39601px);">Hello</span>
-	<span id="text2" style="opacity: 0.61615; filter: blur(18.8456px);">My name is Samuel</span>
+	<span id="text1" style="opacity: 0;">look behind you</span>
+	<span id="text2" style="opacity: 1;">Play Minecraft!</span>
 </div>
 
 <!-- The SVG filter used to create the merging effect -->
@@ -97,7 +97,7 @@ body {
 <a href="https://github.com/TheCodedKid"><i class="fab fa-github-alt" style="color: #ffb8c9" title="Github"></i></a>
 <a href="https://discordapp.com/users/211995538000707584"><i class="fab fa-discord" style="color: #ffb8c9" title="Discord"></i></a>
 <div id="resume">
-<a href="https://fiddle.jshell.net/thecodedkid/pLj12osm/show/light/"><i class="far fa-handshake" style="color: #ffb8c9" title="Resume"></i></a>
+<a href="https://fiddle.jshell.net/thecodedkid/pLj12osm/10/show/light/"><i class="far fa-handshake" style="color: #ffb8c9" title="Resume"></i></a>
 </div>
 </div>
 
@@ -131,8 +131,8 @@ const texts = [
 ];
 
 // Controls the speed of morphing.
-const morphTime = 1;
-const cooldownTime = 0.25;
+const morphTime = 0.5;
+const cooldownTime = 1;
 
 let textIndex = texts.length - 1;
 let time = new Date();
@@ -187,7 +187,7 @@ function animate() {
 	
 	let newTime = new Date();
 	let shouldIncrementIndex = cooldown > 0;
-	let dt = (newTime - time) / 10000;
+	let dt = (newTime - time) / 3000;
 	time = newTime;
 	
 	cooldown -= dt;
