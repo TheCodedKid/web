@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <!-- saved from url=(0061)https://fiddle.jshell.net/thecodedkid/pLj12osm/10/show/light/ -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+
   <title>Samuel's Place</title>
-  
+
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@ body {
 	height: 50pt;
 	top: 0;
 	bottom: 0;
-	
+
 	/* This filter is a lot of the magic, try commenting it out to see how the morphing works! */
 	filter: url(#threshold) blur(0.6px);
 }
@@ -43,13 +43,13 @@ body {
 	position: absolute;
 	width: 100%;
 	display: inline-block;
-	
+
 	font-family: 'Roboto Mono', sans-serif;
 	font-size: 50pt;
   color: #ffb8c9;
-	
+
 	text-align: center;
-	
+
 	user-select: none;
 }
 
@@ -57,10 +57,10 @@ body {
   position: fixed;
   bottom: 20px;
   left: 40px;
-  font-size: 20pt;
+  font-size: 30pt;
   display: grid;
 }
-#resume{
+#LinkedIn{
   font-size: 15pt;
 }
     /* EOS */
@@ -117,15 +117,7 @@ const texts = [
 	"Hello",
 	"My name is Samuel",
 	"good to have you here",
-	"links are on the bottom left",
-    "bottom text",
-    "look behind you",
-    "Play Minecraft!",
-    "now with dark mode",
-    "david was here",
-    "links on bottom left",
-    "uwu",
-    "burp"
+	"links are on the bottom left"
 ];
 
 // Controls the speed of morphing.
@@ -143,38 +135,38 @@ elts.text2.textContent = texts[(textIndex + 1) % texts.length];
 function doMorph() {
 	morph -= cooldown;
 	cooldown = 0;
-	
+
 	let fraction = morph / morphTime;
-	
+
 	if (fraction > 1) {
 		cooldown = cooldownTime;
 		fraction = 1;
 	}
-	
+
 	setMorph(fraction);
 }
 
 // A lot of the magic happens here, this is what applies the blur filter to the text.
 function setMorph(fraction) {
 	// fraction = Math.cos(fraction * Math.PI) / -2 + .5;
-	
+
 	elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
 	elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-	
+
 	fraction = 1 - fraction;
 	elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
 	elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-	
+
 	elts.text1.textContent = texts[textIndex % texts.length];
 	elts.text2.textContent = texts[(textIndex + 1) % texts.length];
 }
 
 function doCooldown() {
 	morph = 0;
-	
+
 	elts.text2.style.filter = "";
 	elts.text2.style.opacity = "100%";
-	
+
 	elts.text1.style.filter = "";
 	elts.text1.style.opacity = "0%";
 }
@@ -182,19 +174,19 @@ function doCooldown() {
 // Animation loop, which is called every frame.
 function animate() {
 	requestAnimationFrame(animate);
-	
+
 	let newTime = new Date();
 	let shouldIncrementIndex = cooldown > 0;
 	let dt = (newTime - time) / 3000;
 	time = newTime;
-	
+
 	cooldown -= dt;
-	
+
 	if (cooldown <= 0) {
 		if (shouldIncrementIndex) {
 			textIndex++;
 		}
-		
+
 		doMorph();
 	} else {
 		doCooldown();
